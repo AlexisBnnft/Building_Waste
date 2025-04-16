@@ -1,6 +1,5 @@
 import dash
-from dash import dcc, html
-import dash_table
+from dash import dcc, html, dash_table
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
@@ -16,6 +15,9 @@ app = dash.Dash(
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
 app.title = "Building Cooling Analysis"
+
+# Create the server variable for Gunicorn
+server = app.server
 
 # Create the app layout
 app.layout = create_main_layout()
