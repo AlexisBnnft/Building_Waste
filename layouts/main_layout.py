@@ -68,248 +68,43 @@ def create_app_layout():
                                     html.Div(
                                         [
                                             html.H3("Upload Your Data Files"),
-                                            html.Div(
-                                                [
-                                                    dcc.Upload(
-                                                        id="upload-cooling",
-                                                        children=html.Div(
-                                                            [
-                                                                "Drag and Drop or ",
-                                                                html.A(
-                                                                    "Select Cooling Data"
-                                                                ),
-                                                            ]
-                                                        ),
-                                                        style={
-                                                            "width": "100%",
-                                                            "height": "60px",
-                                                            "lineHeight": "60px",
-                                                            "borderWidth": "1px",
-                                                            "borderStyle": "dashed",
-                                                            "borderRadius": "5px",
-                                                            "textAlign": "center",
-                                                            "margin": "10px 0",
-                                                            "backgroundColor": COLORS[
-                                                                "light"
-                                                            ],
-                                                        },
-                                                        multiple=False,
-                                                    ),
-                                                    html.Div(
-                                                        id="cooling-upload-status",
-                                                        style={"margin": "5px 0"},
-                                                    ),
-                                                ],
-                                                style={"margin": "10px 0"},
+                                            # Replace all the individual upload components with create_upload_component
+                                            create_upload_component(
+                                                "upload-cooling",
+                                                "Cooling Data",
+                                                FILE_DESCRIPTIONS["cooling"],
                                             ),
-                                            html.Div(
-                                                [
-                                                    dcc.Upload(
-                                                        id="upload-iat",
-                                                        children=html.Div(
-                                                            [
-                                                                "Drag and Drop or ",
-                                                                html.A(
-                                                                    "Select Indoor Air Temperature Data"
-                                                                ),
-                                                            ]
-                                                        ),
-                                                        style={
-                                                            "width": "100%",
-                                                            "height": "60px",
-                                                            "lineHeight": "60px",
-                                                            "borderWidth": "1px",
-                                                            "borderStyle": "dashed",
-                                                            "borderRadius": "5px",
-                                                            "textAlign": "center",
-                                                            "margin": "10px 0",
-                                                            "backgroundColor": COLORS[
-                                                                "light"
-                                                            ],
-                                                        },
-                                                        multiple=False,
-                                                    ),
-                                                    html.Div(
-                                                        id="iat-upload-status",
-                                                        style={"margin": "5px 0"},
-                                                    ),
-                                                ],
-                                                style={"margin": "10px 0"},
+                                            create_upload_component(
+                                                "upload-iat",
+                                                "Indoor Air Temperature Data",
+                                                FILE_DESCRIPTIONS["iat"],
                                             ),
-                                            html.Div(
-                                                [
-                                                    dcc.Upload(
-                                                        id="upload-csp",
-                                                        children=html.Div(
-                                                            [
-                                                                "Drag and Drop or ",
-                                                                html.A(
-                                                                    "Select Cooling Setpoint Data"
-                                                                ),
-                                                            ]
-                                                        ),
-                                                        style={
-                                                            "width": "100%",
-                                                            "height": "60px",
-                                                            "lineHeight": "60px",
-                                                            "borderWidth": "1px",
-                                                            "borderStyle": "dashed",
-                                                            "borderRadius": "5px",
-                                                            "textAlign": "center",
-                                                            "margin": "10px 0",
-                                                            "backgroundColor": COLORS[
-                                                                "light"
-                                                            ],
-                                                        },
-                                                        multiple=False,
-                                                    ),
-                                                    html.Div(
-                                                        id="csp-upload-status",
-                                                        style={"margin": "5px 0"},
-                                                    ),
-                                                ],
-                                                style={"margin": "10px 0"},
+                                            create_upload_component(
+                                                "upload-csp",
+                                                "Cooling Setpoint Data",
+                                                FILE_DESCRIPTIONS["csp"],
                                             ),
-                                            html.Div(
-                                                [
-                                                    dcc.Upload(
-                                                        id="upload-hsp",
-                                                        children=html.Div(
-                                                            [
-                                                                "Drag and Drop or ",
-                                                                html.A(
-                                                                    "Select Heating Setpoint Data (Optional)"
-                                                                ),
-                                                            ]
-                                                        ),
-                                                        style={
-                                                            "width": "100%",
-                                                            "height": "60px",
-                                                            "lineHeight": "60px",
-                                                            "borderWidth": "1px",
-                                                            "borderStyle": "dashed",
-                                                            "borderRadius": "5px",
-                                                            "textAlign": "center",
-                                                            "margin": "10px 0",
-                                                            "backgroundColor": COLORS[
-                                                                "light"
-                                                            ],
-                                                        },
-                                                        multiple=False,
-                                                    ),
-                                                    html.Div(
-                                                        id="hsp-upload-status",
-                                                        style={"margin": "5px 0"},
-                                                    ),
-                                                ],
-                                                style={"margin": "10px 0"},
+                                            create_upload_component(
+                                                "upload-hsp",
+                                                "Heating Setpoint Data (Optional)",
+                                                FILE_DESCRIPTIONS["hsp"],
                                             ),
-                                            # Zone Airflow Upload
-                                            html.Div(
-                                                [
-                                                    dcc.Upload(
-                                                        id="upload-airflow",
-                                                        children=html.Div(
-                                                            [
-                                                                "Drag and Drop or ",
-                                                                html.A(
-                                                                    "Select Zone Airflow Data"
-                                                                ),
-                                                            ]
-                                                        ),
-                                                        style={
-                                                            "width": "100%",
-                                                            "height": "60px",
-                                                            "lineHeight": "60px",
-                                                            "borderWidth": "1px",
-                                                            "borderStyle": "dashed",
-                                                            "borderRadius": "5px",
-                                                            "textAlign": "center",
-                                                            "margin": "10px 0",
-                                                            "backgroundColor": COLORS[
-                                                                "light"
-                                                            ],
-                                                        },
-                                                        multiple=False,
-                                                    ),
-                                                    html.Div(
-                                                        id="airflow-upload-status",
-                                                        style={"margin": "5px 0"},
-                                                    ),
-                                                ],
-                                                style={"margin": "10px 0"},
+                                            create_upload_component(
+                                                "upload-airflow",
+                                                "Zone Airflow Data",
+                                                FILE_DESCRIPTIONS["airflow"],
                                             ),
-                                            # AHU Discharge Temperatures Upload
-                                            html.Div(
-                                                [
-                                                    dcc.Upload(
-                                                        id="upload-ahu-dat",
-                                                        children=html.Div(
-                                                            [
-                                                                "Drag and Drop or ",
-                                                                html.A(
-                                                                    "Select AHU Discharge Temperature Data"
-                                                                ),
-                                                            ]
-                                                        ),
-                                                        style={
-                                                            "width": "100%",
-                                                            "height": "60px",
-                                                            "lineHeight": "60px",
-                                                            "borderWidth": "1px",
-                                                            "borderStyle": "dashed",
-                                                            "borderRadius": "5px",
-                                                            "textAlign": "center",
-                                                            "margin": "10px 0",
-                                                            "backgroundColor": COLORS[
-                                                                "light"
-                                                            ],
-                                                        },
-                                                        multiple=False,
-                                                    ),
-                                                    html.Div(
-                                                        id="ahu-dat-upload-status",
-                                                        style={"margin": "5px 0"},
-                                                    ),
-                                                ],
-                                                style={"margin": "10px 0"},
+                                            create_upload_component(
+                                                "upload-ahu-dat",
+                                                "AHU Discharge Temperature Data",
+                                                FILE_DESCRIPTIONS["ahu_dat"],
                                             ),
-                                            # Zone to AHU Map Upload
-                                            html.Div(
-                                                [
-                                                    dcc.Upload(
-                                                        id="upload-map",
-                                                        children=html.Div(
-                                                            [
-                                                                "Drag and Drop or ",
-                                                                html.A(
-                                                                    "Select Zone to AHU Map Data"
-                                                                ),
-                                                            ]
-                                                        ),
-                                                        style={
-                                                            "width": "100%",
-                                                            "height": "60px",
-                                                            "lineHeight": "60px",
-                                                            "borderWidth": "1px",
-                                                            "borderStyle": "dashed",
-                                                            "borderRadius": "5px",
-                                                            "textAlign": "center",
-                                                            "margin": "10px 0",
-                                                            "backgroundColor": COLORS[
-                                                                "light"
-                                                            ],
-                                                        },
-                                                        multiple=False,
-                                                    ),
-                                                    html.Div(
-                                                        id="map-upload-status",
-                                                        style={"margin": "5px 0"},
-                                                    ),
-                                                ],
-                                                style={"margin": "10px 0"},
+                                            create_upload_component(
+                                                "upload-map",
+                                                "Zone to AHU Map Data",
+                                                FILE_DESCRIPTIONS["map"],
                                             ),
-                                            # Resample frequency settings
+                                            # Keep the resampling dropdown and process button
                                             html.Div(
                                                 [
                                                     html.Label(
