@@ -9,3 +9,8 @@ pip-selfcheck.json
 *.DS_Store
 .idea/
 .vscode/
+
+# Ignore all CSV files in test data directories
+test_app_data/**/*.csv
+
+# Keep any other data files that need to be ignored
