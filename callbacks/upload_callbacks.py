@@ -4,7 +4,7 @@ from utils.file_utils import parse_content
 
 
 @callback(
-    Output("status-iat", "children"),
+    Output("iat-upload-status", "children"),
     [Input("upload-iat", "contents")],
     [State("upload-iat", "filename")],
 )
@@ -16,7 +16,7 @@ def update_iat_status(contents, filename):
 
 
 @callback(
-    Output("status-hsp", "children"),
+    Output("hsp-upload-status", "children"),
     [Input("upload-hsp", "contents")],
     [State("upload-hsp", "filename")],
 )
@@ -28,7 +28,7 @@ def update_hsp_status(contents, filename):
 
 
 @callback(
-    Output("status-csp", "children"),
+    Output("csp-upload-status", "children"),
     [Input("upload-csp", "contents")],
     [State("upload-csp", "filename")],
 )
@@ -40,7 +40,7 @@ def update_csp_status(contents, filename):
 
 
 @callback(
-    Output("status-airflow", "children"),
+    Output("airflow-upload-status", "children"),
     [Input("upload-airflow", "contents")],
     [State("upload-airflow", "filename")],
 )
@@ -52,7 +52,7 @@ def update_airflow_status(contents, filename):
 
 
 @callback(
-    Output("status-ahu-dat", "children"),
+    Output("ahu-dat-upload-status", "children"),
     [Input("upload-ahu-dat", "contents")],
     [State("upload-ahu-dat", "filename")],
 )
@@ -64,7 +64,7 @@ def update_ahu_dat_status(contents, filename):
 
 
 @callback(
-    Output("status-map", "children"),
+    Output("map-upload-status", "children"),
     [Input("upload-map", "contents")],
     [State("upload-map", "filename")],
 )
@@ -76,7 +76,7 @@ def update_map_status(contents, filename):
 
 
 @callback(
-    Output("status-cooling", "children"),
+    Output("cooling-upload-status", "children"),
     [Input("upload-cooling", "contents")],
     [State("upload-cooling", "filename")],
 )

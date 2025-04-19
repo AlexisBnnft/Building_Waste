@@ -5,7 +5,7 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 
-from layouts.main_layout import create_main_layout
+from layouts.main_layout import create_app_layout
 from utils.constants import COLORS
 
 # Initialize the Dash app
@@ -19,13 +19,17 @@ app.title = "Building Cooling Analysis"
 # Create the server variable for Gunicorn
 server = app.server
 
+# Make app callable for Gunicorn
+application = app.server
+
 # Create the app layout
-app.layout = create_main_layout()
+app.layout = create_app_layout()
 
 # Import callbacks - this needs to be done after app is defined
 # to avoid circular imports
 from callbacks.upload_callbacks import *
 from callbacks.analysis_callbacks import *
+from callbacks.preloaded_callbacks import *
 
 # Custom CSS for better styling
 app.index_string = """
@@ -86,6 +90,29 @@ app.index_string = """
                 margin: auto;
                 color: #3498db;
                 font-size: 30px;
+            }
+            
+            /* Custom styling for tabs */
+            .custom-tabs {
+                border-bottom: 1px solid #d6d6d6;
+            }
+            
+            .custom-tab {
+                padding: 15px 20px;
+                color: #586069;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                border-bottom: 0px;
+                transition: all 0.3s ease;
+            }
+            
+            .custom-tab--selected {
+                color: #2c3e50;
+                background-color: white;
+                border-left: 1px solid #d6d6d6;
+                border-right: 1px solid #d6d6d6;
+                border-top: 3px solid #3498db;
+                border-bottom: none;
             }
             
             /* Responsive adjustments */
