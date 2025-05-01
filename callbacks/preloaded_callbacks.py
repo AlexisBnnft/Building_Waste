@@ -460,8 +460,9 @@ def create_zone_detail_plots(zone_name, building_name):
         temp_fig = go.Figure()
 
         if "iat" in raw_data:
-            # Resample to daily for better visualization
-            iat_daily = raw_data["iat"].resample("D").mean()
+            # Filter for business hours (9 AM to 6 PM) and resample to daily
+            iat_business = raw_data["iat"].between_time("9:00", "18:00")
+            iat_daily = iat_business.resample("D").mean()
             temp_fig.add_trace(
                 go.Scatter(
                     x=iat_daily.index,
@@ -473,8 +474,9 @@ def create_zone_detail_plots(zone_name, building_name):
             )
 
         if "hsp" in raw_data:
-            # Resample to daily for better visualization
-            hsp_daily = raw_data["hsp"].resample("D").mean()
+            # Filter for business hours (9 AM to 6 PM) and resample to daily
+            hsp_business = raw_data["hsp"].between_time("9:00", "18:00")
+            hsp_daily = hsp_business.resample("D").mean()
             temp_fig.add_trace(
                 go.Scatter(
                     x=hsp_daily.index,
@@ -486,8 +488,9 @@ def create_zone_detail_plots(zone_name, building_name):
             )
 
         if "csp" in raw_data:
-            # Resample to daily for better visualization
-            csp_daily = raw_data["csp"].resample("D").mean()
+            # Filter for business hours (9 AM to 6 PM) and resample to daily
+            csp_business = raw_data["csp"].between_time("9:00", "18:00")
+            csp_daily = csp_business.resample("D").mean()
             temp_fig.add_trace(
                 go.Scatter(
                     x=csp_daily.index,
@@ -499,7 +502,7 @@ def create_zone_detail_plots(zone_name, building_name):
             )
 
         temp_fig.update_layout(
-            title=f"Zone '{zone_name}' - Temperature and Setpoints",
+            title=f"Zone '{zone_name}' - Temperature and Setpoints (Business Hours: 9AM-6PM)",
             xaxis_title="Date",
             yaxis_title="Temperature (°F)",
             legend=dict(
@@ -512,8 +515,9 @@ def create_zone_detail_plots(zone_name, building_name):
         airflow_fig = go.Figure()
 
         if "airflow" in raw_data:
-            # Resample to daily for better visualization
-            airflow_daily = raw_data["airflow"].resample("D").mean()
+            # Filter for business hours (9 AM to 6 PM) and resample to daily
+            airflow_business = raw_data["airflow"].between_time("9:00", "18:00")
+            airflow_daily = airflow_business.resample("D").mean()
             airflow_fig.add_trace(
                 go.Scatter(
                     x=airflow_daily.index,
@@ -526,7 +530,7 @@ def create_zone_detail_plots(zone_name, building_name):
             )
 
         airflow_fig.update_layout(
-            title=f"Zone '{zone_name}' - Airflow",
+            title=f"Zone '{zone_name}' - Airflow (Business Hours: 9AM-6PM)",
             xaxis_title="Date",
             yaxis_title="Airflow (CFM)",
             margin=dict(l=40, r=40, t=40, b=40),
