@@ -163,6 +163,13 @@ def process_building_data(building_name, data_dir):
         "top_demanding": top_demanding,
     }
 
+    # Include the raw zone data for detailed zone plots
+    # Store the filtered and aligned dataframes
+    processed_data["iat"] = data_dict["iat"]
+    processed_data["hsp"] = data_dict["hsp"]
+    processed_data["csp"] = data_dict["csp"]
+    processed_data["airflow"] = data_dict["airflow"]
+
     return processed_data
 
 

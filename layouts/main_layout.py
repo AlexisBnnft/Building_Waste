@@ -435,23 +435,31 @@ def create_results_layout():
                             "textAlign": "center",
                         },
                     ),
-                    # Third row - Tables and summary
+                    # Third row - Summary table (full width)
                     html.Div(
                         [
                             # Summary table
                             html.Div(
                                 id="summary-table",
                                 style={
-                                    "width": "30%",
-                                    "display": "inline-block",
+                                    "width": "100%",
+                                    "display": "block",
                                     "border": f"1px solid {COLORS['border']}",
                                     "borderRadius": "5px",
                                     "padding": "15px",
                                     "backgroundColor": COLORS["light"],
-                                    "verticalAlign": "top",
                                     "boxSizing": "border-box",
                                 },
                             ),
+                        ],
+                        style={
+                            "marginBottom": "20px",
+                            "width": "100%",
+                        },
+                    ),
+                    # Fourth row - Wasteful and Demanding zones (50% each)
+                    html.Div(
+                        [
                             # Wasteful zones plot
                             html.Div(
                                 [
@@ -472,13 +480,12 @@ def create_results_layout():
                                     html.Div(id="wasteful-zones-plot"),
                                 ],
                                 style={
-                                    "width": "33%",
+                                    "width": "49%",
                                     "display": "inline-block",
                                     "border": f"1px solid {COLORS['border']}",
                                     "borderRadius": "5px",
                                     "padding": "15px",
                                     "backgroundColor": COLORS["light"],
-                                    "marginLeft": "1.5%",
                                     "verticalAlign": "top",
                                     "boxSizing": "border-box",
                                 },
@@ -503,19 +510,28 @@ def create_results_layout():
                                     html.Div(id="demanding-zones-plot"),
                                 ],
                                 style={
-                                    "width": "33%",
+                                    "width": "49%",
                                     "display": "inline-block",
                                     "border": f"1px solid {COLORS['border']}",
                                     "borderRadius": "5px",
                                     "padding": "15px",
                                     "backgroundColor": COLORS["light"],
-                                    "marginLeft": "1.5%",
+                                    "marginLeft": "2%",
                                     "verticalAlign": "top",
                                     "boxSizing": "border-box",
                                 },
                             ),
                         ],
-                        style={"width": "100%", "textAlign": "center"},
+                        style={
+                            "width": "100%",
+                            "textAlign": "center",
+                            "marginBottom": "20px",
+                        },
+                    ),
+                    # Fifth row - Zone Details Container (will be populated when a zone is clicked)
+                    html.Div(
+                        id="zone-details-container",
+                        style={"width": "100%"},
                     ),
                 ]
             ),

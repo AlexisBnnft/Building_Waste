@@ -8,6 +8,11 @@ COLORS = {
     "light": "#ecf0f1",
     "dark": "#34495e",
     "border": "#bdc3c7",
+    # Add color categories for zone types
+    "wasteful": "#e74c3c",  # Red - for wasteful cooling (bin1)
+    "excess": "#f39c12",  # Orange - for excess cooling (bin2-3)
+    "useful": "#27ae60",  # Green - for useful cooling (bin4-6)
+    "demanding": "#3498db",  # Blue - for demanding zones
 }
 
 # File descriptions for upload instructions
