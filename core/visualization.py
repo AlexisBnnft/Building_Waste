@@ -181,3 +181,65 @@ def create_demanding_zones_bar_plot(top_demanding_df):
     )
 
     return fig
+
+
+def create_top_savings_bar_plot(top_savings_df):
+    """Creates a horizontal bar plot of the top zones by potential savings."""
+    if top_savings_df is None or top_savings_df.empty:
+        return go.Figure().update_layout(
+            title="No data available for top savings zones", height=400
+        )
+
+    # Sort by savings value (ascending for horizontal bar chart)
+    # Check which column name is present (legacy or new all zones format)
+    if "Potential Savings (Scaled)" in top_savings_df.columns:
+        savings_column = "Potential Savings (Scaled)"
+    elif "Potential Savings (All Zones)" in top_savings_df.columns:
+        savings_column = "Potential Savings (All Zones)"
+    else:
+        # Fallback to first column after "Zone" if neither expected column is found
+        if len(top_savings_df.columns) >= 2:
+            savings_column = top_savings_df.columns[1]
+        else:
+            return go.Figure().update_layout(
+                title="Invalid top savings data format", height=400
+            )
+
+    df = top_savings_df.sort_values(savings_column)
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            y=df["Zone"],
+            x=df[savings_column],
+            orientation="h",
+            marker_color="#27ae60",  # A nice green for savings
+            text=(
+                df["% of Total Building Savings"].apply(lambda x: f"{x:.1f}%")
+                if "% of Total Building Savings" in df.columns
+                else ""
+            ),
+            textposition="auto",
+            hovertemplate="<b>%{y}</b><br>Potential Savings: %{x:.1f}<br>% of Total Savings: %{text}<extra></extra>",
+        )
+    )
+
+    # Update title based on which savings column we're using
+    title_suffix = ""
+    if savings_column == "Potential Savings (Scaled)":
+        title_suffix = " (IAT < HSP Waste)"
+    elif savings_column == "Potential Savings (All Zones)":
+        title_suffix = " (ASHRAE Minimum Airflow)"
+
+    fig.update_layout(
+        title=f"Top Savings Zones{title_suffix}",
+        xaxis_title="Potential Savings (Cooling Units)",
+        yaxis=dict(
+            autorange="reversed"
+        ),  # Reverse to match table order (highest at top)
+        height=400,
+        margin=dict(l=20, r=20, t=40, b=20),
+        template="plotly_white",
+    )
+
+    return fig

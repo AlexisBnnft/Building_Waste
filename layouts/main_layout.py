@@ -457,7 +457,7 @@ def create_results_layout():
                             "width": "100%",
                         },
                     ),
-                    # Fourth row - Wasteful and Demanding zones (50% each)
+                    # Fourth row - Three plots: Wasteful, Demanding, and Savings zones (1/3 each)
                     html.Div(
                         [
                             # Wasteful zones plot
@@ -479,8 +479,9 @@ def create_results_layout():
                                     ),
                                     html.Div(id="wasteful-zones-plot"),
                                 ],
+                                className="pretty_container four columns",
                                 style={
-                                    "width": "49%",
+                                    "width": "32%",
                                     "display": "inline-block",
                                     "border": f"1px solid {COLORS['border']}",
                                     "borderRadius": "5px",
@@ -501,7 +502,7 @@ def create_results_layout():
                                         },
                                     ),
                                     html.P(
-                                        "These zones have the most cooling energy used when indoor temperature is above the cooling setpoint:",
+                                        "These zones have the most cooling energy used overall:",
                                         style={
                                             "fontSize": "0.9rem",
                                             "marginBottom": "10px",
@@ -509,8 +510,41 @@ def create_results_layout():
                                     ),
                                     html.Div(id="demanding-zones-plot"),
                                 ],
+                                className="pretty_container four columns",
                                 style={
-                                    "width": "49%",
+                                    "width": "32%",
+                                    "display": "inline-block",
+                                    "border": f"1px solid {COLORS['border']}",
+                                    "borderRadius": "5px",
+                                    "padding": "15px",
+                                    "backgroundColor": COLORS["light"],
+                                    "marginLeft": "2%",
+                                    "verticalAlign": "top",
+                                    "boxSizing": "border-box",
+                                },
+                            ),
+                            # Savings zones plot (added as third column)
+                            html.Div(
+                                [
+                                    html.H3(
+                                        "Top Savings Zones (ASHRAE Minimum Airflow)",
+                                        style={
+                                            "textAlign": "center",
+                                            "fontSize": "1rem",
+                                        },
+                                    ),
+                                    html.P(
+                                        "These zones have the most potential savings by reducing airflow to ASHRAE guidelines:",
+                                        style={
+                                            "fontSize": "0.9rem",
+                                            "marginBottom": "10px",
+                                        },
+                                    ),
+                                    html.Div(id="top-savings-all-zones-plot"),
+                                ],
+                                className="pretty_container four columns",
+                                style={
+                                    "width": "32%",
                                     "display": "inline-block",
                                     "border": f"1px solid {COLORS['border']}",
                                     "borderRadius": "5px",
